@@ -1,0 +1,52 @@
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+$text-color: #323232;
+$color-0: #F4F7EF;
+$color-1: #EBEDE6;
+$color-2: #D5D8D0;
+$color-3: #6D6E6B;
+$red-1: #D97070;
+$red-2: #C79592;
+$red-3: #A74242;
+$green-1: #50C878;
+$green-2: #34824F;
+
+div * {
+  font-family: Arial;
+  color: $text-color;
+  text-decoration: none;
+}
+
+
+.app {
+  display: grid;
+  grid-template-columns: 20% auto 20%;
+  grid-template-rows: 50px 1fr 20%;
+  grid-template-areas:
+  '. . .'
+  '. window .'
+  '. . .';
+
+}
+
+.window {
+  grid-area: window;
+}
+
+.sign-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sign-button {
+  background-color: $color-2;
+  height: 20px;
+  width: 100px;
+}
