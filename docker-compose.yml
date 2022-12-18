@@ -2,9 +2,7 @@ version: '3.7'
 
 services:
   db:
-    # env_file:
-    #   - /api/.env
-    container_name: db-container
+    container_name: todo-list-db-container
     image: postgres
     volumes:
       - postgres_data:/api/db/
@@ -13,21 +11,25 @@ services:
       POSTGRES_USER: $PSQL_USER
       POSTGRES_DB: $PSQL_NAME
   api:
-    # env_file:
-    #   - ./api/.env
-    container_name: api-container
+    container_name: todo-list-api-container
     environment:
       PORT: $PORT
     build: ./api      
-    command: bash -c "python api/manage.py migrate --noinput &&
-             python api/manage.py runserver 0.0.0.0:$PORT"
+    command: bash -c "python manage.py migrate --noinput &&
+             python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - .:/api/
+      - ./api:/api
     ports:
-      - 8000:$PORT
+      - 8000:8000
     depends_on:
       - db
-
+  front:
+    container_name: todo-list-front-container
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/frontend
 
 volumes:
   postgres_data:
