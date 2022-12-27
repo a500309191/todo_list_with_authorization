@@ -6,38 +6,31 @@
   scrollbar-width: none;
 }
 
-$text-color: #323232;
-$color-0: #F4F7EF;
-$color-1: #EBEDE6;
-$color-2: #D5D8D0;
-$color-3: #6D6E6B;
-$red-1: #D97070;
-$red-2: #C79592;
-$red-3: #A74242;
-$green-1: #50C878;
-$green-2: #34824F;
-
 div * {
   font-family: Arial;
-  color: $text-color;
+  color: black;
   text-decoration: none;
 }
 
 
-.app {
+
+.window {
   display: grid;
   grid-template-columns: 20% auto 20%;
   grid-template-rows: 50px 1fr 20%;
   grid-template-areas:
-  '. . .'
-  '. window .'
-  '. . .';
-
+    '. . .'
+    '. app .'
+    '. . .';
 }
 
-.window {
-  grid-area: window;
+.app {
+  grid-area: app;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
+
 
 .sign-form {
   display: flex;
@@ -46,7 +39,14 @@ div * {
 }
 
 .sign-button {
-  background-color: $color-2;
+  background-color: red;
   height: 20px;
-  width: 100px;
+  width: auto;
+}
+
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
