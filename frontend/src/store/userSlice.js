@@ -17,6 +17,7 @@ export const setToken = createAsyncThunk(
             }
 
             const data = await response.json()
+            console.log("LOGIN: ", data)
             return data.auth_token
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message)
@@ -56,6 +57,30 @@ export const login = createAsyncThunk(
 
 
 
+
+export const updateTasks = createAsyncThunk(
+    'user/updateTasks',
+    async ({token}, thunkAPI) => {
+        try {
+            const response = await fetch('http://localhost:8000/api/tasks/', {
+                method: "GET",
+                headers: {"Authorization": `Token ${JSON.parse(token)}`}
+            });
+            
+            if (!response.ok) {
+                throw new Error("something went wrong")
+            }
+
+            const data = await response.json()
+            return data
+
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message)
+        }
+    }
+)
+
+
 const userSlice = createSlice({
     name: "user",
     initialState: {
@@ -87,6 +112,21 @@ const userSlice = createSlice({
             })
 			.addCase(login.rejected, (state, action) => {
                 console.log("login rejected")
+				state.loading = false
+                state.status = "rejected"
+                state.error = action.payload
+			})
+            .addCase(updateTasks.pending, state  => {
+                state.status = 'loading'
+                state.error = null
+            })
+            .addCase(updateTasks.fulfilled, (state, action) => {
+                state.status = 'resolved'
+                state.isAuthenticated = true
+                state.registered = true
+                state.tasks = action.payload
+            })
+			.addCase(updateTasks.rejected, (state, action) => {
 				state.loading = false
                 state.status = "rejected"
                 state.error = action.payload

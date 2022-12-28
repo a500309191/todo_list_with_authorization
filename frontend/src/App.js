@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { login } from "./store/userSlice"
-import { TaskList } from "./TaskList"
-import { SignForm } from "./SignForm"
+import { TaskList } from "./Components/TaskList"
+import { SignForm } from "./Components/SignForm"
+import { UserAccount } from "./Components/UserAccount"
 import { Routes, Route } from "react-router-dom";
 import './App.css'
 
@@ -20,7 +21,7 @@ export const App = () => {
 
   return (
     <div className="app">
-      {isAuthenticated ? <TaskList /> : <SignForm />}
+      {isAuthenticated ? <UserAccount /> : <SignForm />}
     </div>
   )
 }

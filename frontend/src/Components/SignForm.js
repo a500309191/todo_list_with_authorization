@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { setToken, login } from "./store/userSlice"
+import { setToken, login } from "../store/userSlice"
 
 export const SignForm = ({ onChange }) => {
 
@@ -14,7 +14,7 @@ export const SignForm = ({ onChange }) => {
             <input className="sign-password" onChange={e => setPassword(e.target.value)} />
             <div className="sign-button" onClick={() => {
                 dispatch(setToken({email, password}))
-            }}></div>
+            }}>SIGN</div>
         </div>
     )
 }

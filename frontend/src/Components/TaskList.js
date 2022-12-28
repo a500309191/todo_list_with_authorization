@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
-import { login } from "./store/userSlice"
+import { login } from "../store/userSlice"
+import { Task } from "./Task"
 
 
 export const TaskList = () => {
@@ -16,14 +17,7 @@ export const TaskList = () => {
 
     return (
         <div className="tasks">
-            {tasks.map((task, index) => {
-                return (
-                    <div className="task" key={index}>
-                        <div className="task-title">{task.title}</div>
-                        <div className="task-body">{task.body}</div>
-                    </div>
-                )
-            })}
+            {tasks.map((task, index) => <Task task={task} key={task.id}/> )}
         </div>
     )
 }

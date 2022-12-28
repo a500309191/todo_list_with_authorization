@@ -50,3 +50,20 @@ div * {
   flex-direction: column;
   gap: 10px;
 }
+
+
+
+
+
+
+
+.user-account {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.add-task {
+  display: flex;
+  flex-direction: column;
+}
