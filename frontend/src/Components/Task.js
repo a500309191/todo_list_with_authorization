@@ -1,5 +1,6 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { updateTasks } from "../store/userSlice"
+import { editTask } from "../store/userSlice"
 
 
 export const Task = ({task}) => {
@@ -20,13 +21,18 @@ export const Task = ({task}) => {
         .then(res => console.log("DELETE TASK RESPONSE: ", res))
         .then(() => dispatch(updateTasks({token})))
     }
-    
+
+
     return (
         <div className="task">
             <div className="task-title">{title}</div>
             <div className="task-body">{body}</div>
             <div className="task-date">{expiry_date}</div>
-            <div className="task-delete" onClick={() => deleteTask(id)}>DELETE</div>
+            <div className="task-buttons">
+                <div className="task-edit" onClick={() => dispatch(editTask(id))}>EDIT</div>
+                <div className="task-delete" onClick={() => deleteTask(id)}>X</div>
+            </div>
+
         </div>
     )
 }

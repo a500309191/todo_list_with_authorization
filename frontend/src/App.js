@@ -5,7 +5,7 @@ import { TaskList } from "./Components/TaskList"
 import { SignForm } from "./Components/SignForm"
 import { UserAccount } from "./Components/UserAccount"
 import { Routes, Route } from "react-router-dom";
-import './App.css'
+import './App.scss'
 
 
 export const App = () => {

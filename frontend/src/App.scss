@@ -1,3 +1,12 @@
+$text-color: #323232;
+$gray: #ebedf4;
+$green: #99C794;
+$red: #EC6066;
+$dark_gray: #AFB0B5;
+
+
+
+
 ::-webkit-scrollbar {
   display: none;
 }
@@ -11,6 +20,8 @@ div * {
   color: black;
   text-decoration: none;
 }
+
+
 
 
 
@@ -66,4 +77,54 @@ div * {
 .add-task {
   display: flex;
   flex-direction: column;
+}
+
+
+
+
+
+
+
+.task {
+  display: grid;
+  grid-template-rows: auto 40px auto;
+  grid-template-areas:
+    'title title title'
+    'body body body'
+    'date . buttons';
+  row-gap: 3px;
+}
+
+.task > div {
+  padding: 3px;
+}
+
+.task-title,
+.task-body,
+.task-date {
+  background-color: $dark_gray;
+}
+
+.task-title {
+  grid-area: title;
+}
+.task-body {
+  grid-area: body;
+}
+.task-date {
+  grid-area: date;
+}
+.task-buttons {
+  grid-area: buttons;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+.task-buttons > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  background-color: $dark_gray;
 }

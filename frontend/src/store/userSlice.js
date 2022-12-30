@@ -87,10 +87,16 @@ const userSlice = createSlice({
         isAuthenticated: false,
         registered: false,
         tasks: [],
+        editTask: null,
         status: null,
         error: null,
     },
-    reducers: {},
+    reducers: {
+        editTask(state, action) {
+            //state.todos.push(action.payload)
+            state.editTask = action.payload
+        },
+    },
     extraReducers: builder => {
         builder
             .addCase(setToken.fulfilled, (state, action) => {
@@ -135,6 +141,6 @@ const userSlice = createSlice({
 })
 
 
-//export const { addTodo, removeTodo, toggleTodoComplete } = todoSlice.actions;
-const { test } = userSlice.actions
+
+export const { editTask } = userSlice.actions
 export default userSlice.reducer
