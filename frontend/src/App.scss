@@ -59,7 +59,7 @@ div * {
 .tasks {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
 }
 
 
@@ -81,11 +81,15 @@ div * {
 
 
 
+.task-container {
+  display: grid;
+  grid-template-areas: "task";
+  position: relative;
+}
 
-
-
-
-.task {
+.task,
+.task-edit {
+  grid-area: task;
   display: grid;
   grid-template-rows: auto 40px auto;
   grid-template-areas:
@@ -95,7 +99,8 @@ div * {
   row-gap: 3px;
 }
 
-.task > div {
+.task > div,
+.task-edit > div {
   padding: 3px;
 }
 
@@ -105,13 +110,16 @@ div * {
   background-color: $dark_gray;
 }
 
-.task-title {
+.task-title,
+.task-title-edit {
   grid-area: title;
 }
-.task-body {
+.task-body,
+.task-body-edit {
   grid-area: body;
 }
-.task-date {
+.task-date,
+.task-date-edit {
   grid-area: date;
 }
 .task-buttons {
@@ -127,4 +135,16 @@ div * {
   width: 100%;
   cursor: pointer;
   background-color: $dark_gray;
+}
+
+
+
+
+
+
+.hide {
+  // display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition-duration: 0.3s;
 }

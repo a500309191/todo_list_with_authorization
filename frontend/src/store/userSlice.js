@@ -87,14 +87,14 @@ const userSlice = createSlice({
         isAuthenticated: false,
         registered: false,
         tasks: [],
-        editTask: null,
+        edit: null,
         status: null,
         error: null,
     },
     reducers: {
         editTask(state, action) {
             //state.todos.push(action.payload)
-            state.editTask = action.payload
+            state.edit = action.payload
         },
     },
     extraReducers: builder => {
