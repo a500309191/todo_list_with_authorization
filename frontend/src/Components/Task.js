@@ -8,7 +8,12 @@ export const Task = ({task, hide}) => {
     const {id, title, body, expiry_date} = task
     const dispatch = useDispatch()
     
+    
+    const expiryDate = new Date(expiry_date.slice(0,-1))
+    const nowDateStamp = Date.now()
+    const expiryDateStamp = Date.parse(expiry_date.slice(0,-1))
 
+    
     const deleteTask = (id) => {
         const token = localStorage.getItem('token')
         fetch(`http://localhost:8000/api/tasks/${id}`, {
@@ -24,10 +29,10 @@ export const Task = ({task, hide}) => {
 
 
     return (
-        <div className={`task ${edit === id ? "hide" : ""}`}>
+        <div className={`task ${edit === id ? "hide" : ""} ${expiryDateStamp < nowDateStamp ? "outdated" : ""}`}>
             <div className="task-title">{title}</div>
             <div className="task-body">{body}</div>
-            <div className="task-date">{expiry_date}</div>
+            <div className="task-date">{expiryDate.toLocaleString()}</div>
             <div className="task-buttons">
                 <div className="task-edit" onClick={() => dispatch(editTask(id))}>EDIT</div>
                 <div className="task-delete" onClick={() => deleteTask(id)}>DELETE</div>

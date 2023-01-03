@@ -90,6 +90,7 @@ const userSlice = createSlice({
         edit: null,
         status: null,
         error: null,
+        user_id: null,
     },
     reducers: {
         editTask(state, action) {

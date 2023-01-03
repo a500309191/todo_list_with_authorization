@@ -148,3 +148,7 @@ div * {
   visibility: hidden;
   transition-duration: 0.3s;
 }
+
+.outdated {
+  background-color: rgba(255, 0, 0, 0.5);
+}
