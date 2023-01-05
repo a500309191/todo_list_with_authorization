@@ -96,26 +96,23 @@ div * {
 .task-edit {
   grid-area: task;
   display: grid;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto auto auto;
+  grid-template-columns: 150px auto auto;
+  grid-template-rows: 25px auto 20px;
   grid-template-areas:
     'title title title'
     'body body body'
     'date . buttons';
-  row-gap: 3px;
-}
-
-
-.task-title,
-.task-body,
-.task-date {
-  background-color: $dark_gray;
+  row-gap: 6px;
 }
 
 .task-title,
 .task-title-edit {
+  display: flex;
+  align-items: center;
   grid-area: title;
-  height: 20px;
+  font-size: 20px;
+  padding: 5px;
+  background-color: $gray;
 }
 .task-body,
 .task-body-edit {
@@ -123,39 +120,53 @@ div * {
   resize: none;
   word-break: break-word;
   font-size: 14px;
-  min-height: 60px;
-  max-height: 60px;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: $gray;
 }
 .task-date,
 .task-date-edit {
   grid-area: date;
-}
-.task-buttons {
-  grid-area: buttons;
-  display: flex;
-  gap: 6px;
-  justify-content: right;
-  justify-self: right;
-  grid-area: buttons;
-  width: 200px;
-}
-.task-buttons > div {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
-  cursor: pointer;
-  background-color: $dark_gray;
+  text-align: center;
+  background-color: $gray;
 }
-
-.task-date,
-.task-date-edit,
+.task-buttons {
+  grid-area: buttons;
+  display: grid;
+  justify-content: right;
+  justify-self: right;
+  grid-template-columns: 100px 100px;
+  grid-template-areas: "button1 button2";
+  gap: 10px;
+}
+.task-button-edit,
+.task-button-accept {
+  grid-area: button1;
+}
+.task-button-delete,
+.task-button-cancel {
+  grid-area: button2;
+}
 .task-buttons > div {
-  height: 100%;
+  background-color: $gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  transition-duration: 0.1s;
+  font-size: 14px;
 }
-
-
-
+.task-button-edit:hover,
+.task-button-accept:hover,
+.task-button-delete:hover,
+.task-button-cancel:hover {
+  font-size: 16px;
+}
 
 .task-title-edit,
 .task-title-edit:focus,
@@ -163,30 +174,10 @@ div * {
 .task-body-edit:focus,
 .task-date-edit,
 .task-date-edit:focus {
-  box-sizing: border-box;
-  border: none;
-  outline: none;
-  background-color: rgba(237, 235, 230, 0.5);
+    box-sizing: border-box;
+    border: none;
+    outline: none;
 }
-
-
-
-
-
-
-.add-task-title {
-
-}
-.add-task-body {
-  resize: none;
-  border: none;
-  outline: none;
-}
-.add-task-date {
-  
-}
-
-
 
 
 

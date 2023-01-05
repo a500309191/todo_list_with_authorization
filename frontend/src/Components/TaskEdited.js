@@ -38,7 +38,7 @@ export const TaskEdited = ({task}) => {
                 setExpiryDate("")
             })
         } else {
-            console.log("data is not filled")
+            console.log("data is not changed")
         }
     }
 
@@ -65,14 +65,14 @@ export const TaskEdited = ({task}) => {
             />
             <div className="task-buttons">
                 <div
-                className="task-accept"
+                className="task-button-accept"
                     onClick={() => {
                         updateTask()
                         dispatch(editTask(null))
                     }}
                 >ACCEPT</div>
                 <div
-                    className="task-accept"
+                    className="task-button-cancel"
                     onClick={() => dispatch(editTask(null))}
                 >CANCEL</div>
             </div>

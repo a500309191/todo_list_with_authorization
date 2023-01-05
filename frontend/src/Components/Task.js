@@ -41,8 +41,8 @@ export const Task = ({task, hide}) => {
             <div className="task-body">{body}</div>
             <div className="task-date">{D}.{M}.{Y} / {h}:{m}</div>
             <div className="task-buttons">
-                <div className="task-edit" onClick={() => dispatch(editTask(id))}>EDIT</div>
-                <div className="task-delete" onClick={() => deleteTask(id)}>DELETE</div>
+                <div className="task-button-edit" onClick={() => dispatch(editTask(id))}>EDIT</div>
+                <div className="task-button-delete" onClick={() => deleteTask(id)}>DELETE</div>
             </div>
         </div>
     )
