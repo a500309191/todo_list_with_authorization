@@ -12,6 +12,13 @@ export const Task = ({task, hide}) => {
     const expiryDate = new Date(expiry_date.slice(0,-1))
     const nowDateStamp = Date.now()
     const expiryDateStamp = Date.parse(expiry_date.slice(0,-1))
+    const [Y, M, D, h, m] = [
+        expiryDate.getFullYear(), 
+        `${expiryDate.getMonth() < 10 ? `0${expiryDate.getMonth()+1}` : expiryDate.getMonth()+1}`,
+        `${expiryDate.getDate() < 10 ? `0${expiryDate.getDate()}` : expiryDate.getDate()}`,
+        `${expiryDate.getHours() < 10 ? `0${expiryDate.getHours()}` : expiryDate.getHours()}`,
+        `${expiryDate.getMinutes() < 10 ? `0${expiryDate.getMinutes()}` : expiryDate.getMinutes()}`,
+    ]
 
     
     const deleteTask = (id) => {
@@ -32,7 +39,7 @@ export const Task = ({task, hide}) => {
         <div className={`task ${edit === id ? "hide" : ""} ${expiryDateStamp < nowDateStamp ? "outdated" : ""}`}>
             <div className="task-title">{title}</div>
             <div className="task-body">{body}</div>
-            <div className="task-date">{expiryDate.toLocaleString()}</div>
+            <div className="task-date">{D}.{M}.{Y} / {h}:{m}</div>
             <div className="task-buttons">
                 <div className="task-edit" onClick={() => dispatch(editTask(id))}>EDIT</div>
                 <div className="task-delete" onClick={() => deleteTask(id)}>DELETE</div>

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { login } from "./store/userSlice"
-import { TaskList } from "./Components/TaskList"
-import { SignForm } from "./Components/SignForm"
-import { UserAccount } from "./Components/UserAccount"
+import { TaskList } from "./components/TaskList"
+import { SignForm } from "./components/SignForm"
+import { UserAccount } from "./components/UserAccount"
 import { Routes, Route } from "react-router-dom";
 import './App.scss'
 

@@ -8,28 +8,38 @@ export const TaskEdited = ({task}) => {
     const {user, id, title, body, expiry_date} = task
     const dispatch = useDispatch()
 
-    const [updatedTitle, setTitle] = useState()
-    const [updatedBody, setBody] = useState()
-    const [updatedExpiryDate, setExpiryDate] = useState()
+    const [updatedTitle, setTitle] = useState("")
+    const [updatedBody, setBody] = useState("")
+    const [updatedExpiryDate, setExpiryDate] = useState("")
+
 
     const updateTask = () => {
-        const req_body = JSON.stringify({
-            "title": updatedTitle ? updatedTitle : title,
-            "body": updatedBody ? updatedBody : body,
-            "expiry_date": updatedExpiryDate ? updatedExpiryDate : expiry_date,
-            "user": user
-        })
-        const token = localStorage.getItem('token')
-        fetch(`http://localhost:8000/api/tasks/${id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Token ${JSON.parse(token)}`
-            },
-            body: req_body
-        })
-        .then(res => console.log("UPDATE TASK RESPONSE: ", res))
-        .then(() => dispatch(updateTasks({token})))
+        if (updatedTitle || updatedBody || updatedExpiryDate) {
+            const req_body = JSON.stringify({
+                "title": updatedTitle ? updatedTitle : title,
+                "body": updatedBody ? updatedBody : body,
+                "expiry_date": updatedExpiryDate ? updatedExpiryDate : expiry_date,
+                "user": user
+            })
+            const token = localStorage.getItem('token')
+            fetch(`http://localhost:8000/api/tasks/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Token ${JSON.parse(token)}`
+                },
+                body: req_body
+            })
+            .then(res => console.log("UPDATE TASK RESPONSE: ", res))
+            .then(() => dispatch(updateTasks({token})))
+            .then(() => {
+                setTitle("")
+                setBody("")
+                setExpiryDate("")
+            })
+        } else {
+            console.log("data is not filled")
+        }
     }
 
 
@@ -54,11 +64,17 @@ export const TaskEdited = ({task}) => {
                 onChange={e => setExpiryDate(e.target.value)}
             />
             <div className="task-buttons">
-                <div className="task-accept" onClick={() => {
-                    updateTask()
-                    dispatch(editTask(null))
-                }}>ACCEPT</div>
-                <div className="task-accept" onClick={() => dispatch(editTask(null))}>CANCEL</div>
+                <div
+                className="task-accept"
+                    onClick={() => {
+                        updateTask()
+                        dispatch(editTask(null))
+                    }}
+                >ACCEPT</div>
+                <div
+                    className="task-accept"
+                    onClick={() => dispatch(editTask(null))}
+                >CANCEL</div>
             </div>
 
         </div>
