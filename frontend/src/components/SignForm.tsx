@@ -1,12 +1,12 @@
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from '../hooks';
 import { useState, useEffect } from "react";
 import { setToken, login } from "../store/userSlice"
 
-export const SignForm = ({ onChange }) => {
+export const SignForm = () => {
 
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
-    const dispatch = useDispatch()
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const dispatch = useAppDispatch()
 
     return (
         <div className="sign-form">

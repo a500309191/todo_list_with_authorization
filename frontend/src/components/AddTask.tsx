@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux"
+import { useAppSelector, useAppDispatch } from "../hooks"
 import { updateTasks } from "../store/userSlice"
 
 
 export const AddTask = () => {
 
-    const [title, setTitle] = useState()
-    const [body, setBody] = useState()
-    const [date, setDate] = useState()
+    const [title, setTitle] = useState("")
+    const [body, setBody] = useState("")
+    const [date, setDate] = useState("")
 
-    const tasks = useSelector(state => state.user.tasks)
-    const dispatch = useDispatch()
+    const tasks = useAppSelector(state => state.user.tasks)
+    const dispatch = useAppDispatch()
 
     const addTask = () => {
         const req_body = JSON.stringify({
@@ -20,16 +20,21 @@ export const AddTask = () => {
             "user": 2
         })
         const token = localStorage.getItem('token')
-        fetch("http://localhost:8000/api/tasks/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Token ${JSON.parse(token)}`
-            },
-            body: req_body
-        })
-        .then(res => console.log("ADD TASK RESPONSE: ", res))
-        .then(() => dispatch(updateTasks({token})))
+        if (token) {
+            fetch("http://localhost:8000/api/tasks/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Token ${JSON.parse(token)}`
+                },
+                body: req_body
+            })
+            .then(res => console.log("ADD TASK RESPONSE: ", res))
+            .then(() => dispatch(updateTasks(token)))
+        } else {
+            console.log("there is no token")
+        }
+
     }
 
 

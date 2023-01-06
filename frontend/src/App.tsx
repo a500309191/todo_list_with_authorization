@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useAppDispatch, useAppSelector } from './hooks';
 import { login } from "./store/userSlice"
 import { TaskList } from "./components/TaskList"
 import { SignForm } from "./components/SignForm"
@@ -9,8 +9,8 @@ import './App.scss'
 
 
 export const App = () => {
-  const dispatch = useDispatch()
-  const isAuthenticated = useSelector(state => state.user.isAuthenticated)
+  const dispatch = useAppDispatch()
+  const isAuthenticated = useAppSelector(state => state.user.isAuthenticated)
 
   useEffect(() => {
     dispatch(login())

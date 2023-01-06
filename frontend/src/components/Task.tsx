@@ -1,12 +1,13 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useAppDispatch, useAppSelector } from "../hooks"
 import { updateTasks } from "../store/userSlice"
 import { editTask } from "../store/userSlice"
+import { Task as TaskType } from "../schemas/taskSchemas"
 
 
-export const Task = ({task, hide}) => {
-    const edit = useSelector(state => state.user.edit)
-    const {id, title, body, expiry_date} = task
-    const dispatch = useDispatch()
+
+export const Task: React.FC<TaskType> = ({id, title, body, expiry_date}) => {
+    const edit = useAppSelector(state => state.user.edit)
+    const dispatch = useAppDispatch()
     
     
     const expiryDate = new Date(expiry_date.slice(0,-1))
@@ -21,17 +22,21 @@ export const Task = ({task, hide}) => {
     ]
 
     
-    const deleteTask = (id) => {
+    const deleteTask = (id: number) => {
         const token = localStorage.getItem('token')
-        fetch(`http://localhost:8000/api/tasks/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Token ${JSON.parse(token)}`
-            }
-        })
-        .then(res => console.log("DELETE TASK RESPONSE: ", res))
-        .then(() => dispatch(updateTasks({token})))
+        if (token) {
+            fetch(`http://localhost:8000/api/tasks/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Token ${JSON.parse(token)}`
+                }
+            })
+            .then(res => console.log("DELETE TASK RESPONSE: ", res))
+            .then(() => dispatch(updateTasks(token)))
+        } else {
+            console.log("there is no token")
+        }
     }
 
 

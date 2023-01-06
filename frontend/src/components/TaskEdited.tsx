@@ -1,12 +1,13 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useAppDispatch, useAppSelector } from "../hooks"
 import { updateTasks } from "../store/userSlice"
 import { editTask } from "../store/userSlice"
 import { useState } from "react"
+import { Task as TaskType } from "../schemas/taskSchemas"
 
-export const TaskEdited = ({task}) => {
-    const edit = useSelector(state => state.user.edit)
-    const {user, id, title, body, expiry_date} = task
-    const dispatch = useDispatch()
+
+export const TaskEdited: React.FC<TaskType> = ({id, title, body, expiry_date, user}) => {
+    const edit = useAppSelector(state => state.user.edit)
+    const dispatch = useAppDispatch()
 
     const [updatedTitle, setTitle] = useState("")
     const [updatedBody, setBody] = useState("")
@@ -22,21 +23,26 @@ export const TaskEdited = ({task}) => {
                 "user": user
             })
             const token = localStorage.getItem('token')
-            fetch(`http://localhost:8000/api/tasks/${id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Token ${JSON.parse(token)}`
-                },
-                body: req_body
-            })
-            .then(res => console.log("UPDATE TASK RESPONSE: ", res))
-            .then(() => dispatch(updateTasks({token})))
-            .then(() => {
-                setTitle("")
-                setBody("")
-                setExpiryDate("")
-            })
+            if (token) {
+                fetch(`http://localhost:8000/api/tasks/${id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Token ${JSON.parse(token)}`
+                    },
+                    body: req_body
+                })
+                .then(res => console.log("UPDATE TASK RESPONSE: ", res))
+                .then(() => dispatch(updateTasks(token)))
+                .then(() => {
+                    setTitle("")
+                    setBody("")
+                    setExpiryDate("")
+                })
+            } else {
+                console.log("there is no token")
+            }
+
         } else {
             console.log("data is not changed")
         }

@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux"
+import { useAppSelector, useAppDispatch } from "../hooks"
 import { useEffect } from "react"
 import { login } from "../store/userSlice"
 import { Task } from "./Task"
@@ -6,8 +6,8 @@ import { TaskEdited } from "./TaskEdited"
 
 
 export const TaskList = () => {
-    const tasks = useSelector(state => state.user.tasks)
-    const dispatch = useDispatch()
+    const tasks = useAppSelector(state => state.user.tasks)
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(login())
@@ -17,10 +17,10 @@ export const TaskList = () => {
 
     return (
         <div className="tasks">
-            {tasks.map((task, index) => 
+            {tasks.map((task) => 
                 <div className="task-container" key={task.id}>
-                    <TaskEdited task={task} />
-                    <Task task={task} />
+                    <TaskEdited {...task} />
+                    <Task {...task} />
                 </div>
             )}
         </div>
