@@ -1,20 +1,25 @@
-import { useAppDispatch } from '../hooks';
-import { useState, useEffect } from "react";
-import { setToken, login } from "../store/userSlice"
+import { Routes, Route, Link, useLocation } from "react-router-dom";
+import { Registration } from "./Registration";
+import { Login } from "./Login";
+
 
 export const SignForm = () => {
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const dispatch = useAppDispatch()
+    const location = useLocation().pathname
 
     return (
         <div className="sign-form">
-            <input className="sign-email" onChange={e => setEmail(e.target.value)} />
-            <input className="sign-password" onChange={e => setPassword(e.target.value)} />
-            <div className="sign-button" onClick={() => {
-                dispatch(setToken({email, password}))
-            }}>SIGN</div>
+            <div
+                className="sign-tumbler"
+                style={{ backgroundPosition: `${location == "/registration" ? "left" : "right"}` }}
+            >
+                <Link to="/" className="log-button">LOGIN</Link>
+                <Link to="/registration" className="reg-button">REGISTRATION</Link>
+            </div>
+            <Routes>
+                <Route path="/" element={<Login />}/>
+                <Route path="/registration" element={<Registration />}/>
+            </Routes>
         </div>
     )
 }

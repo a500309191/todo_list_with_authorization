@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../hooks"
-import { updateTasks } from "../store/userSlice"
+import { updateTasks } from "../store/taskSlice"
 
 
 export const AddTask = () => {
@@ -9,7 +9,7 @@ export const AddTask = () => {
     const [body, setBody] = useState("")
     const [date, setDate] = useState("")
 
-    const tasks = useAppSelector(state => state.user.tasks)
+    const tasks = useAppSelector(state => state.task.tasks)
     const dispatch = useAppDispatch()
 
     const addTask = () => {

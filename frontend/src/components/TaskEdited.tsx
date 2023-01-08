@@ -1,12 +1,12 @@
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { updateTasks } from "../store/userSlice"
-import { editTask } from "../store/userSlice"
+import { updateTasks } from "../store/taskSlice"
+import { editTask } from "../store/taskSlice"
 import { useState } from "react"
 import { Task as TaskType } from "../schemas/taskSchemas"
 
 
 export const TaskEdited: React.FC<TaskType> = ({id, title, body, expiry_date, user}) => {
-    const edit = useAppSelector(state => state.user.edit)
+    const edit = useAppSelector(state => state.task.edit)
     const dispatch = useAppDispatch()
 
     const [updatedTitle, setTitle] = useState("")
