@@ -3,6 +3,12 @@ export type Login = {
     password: string
 }
 
+export type User = {
+    email: string
+    password: string
+    id: number
+}
+
 export type Task = {
     id: number
     title: string

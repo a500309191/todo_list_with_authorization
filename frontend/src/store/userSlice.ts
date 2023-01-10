@@ -1,29 +1,30 @@
 import { createSlice, PayloadAction, createAsyncThunk, AnyAction } from "@reduxjs/toolkit";
-import type { Login } from "../schemas/taskSchemas"
+import type { Login, User } from "../schemas/schemas"
 
 
-// export const createAccount = createAsyncThunk<string, Login, {rejectValue: string}>(
-//     'user/createAccount',
-// 	async ({email, password}, thunkAPI) => {
-//         const response = await fetch("http://localhost:8000/api/auth/users/", {
-//             method: "POST",
-//             headers: {"Content-Type": "application/json"},
-//             body: JSON.stringify({"email": email, "password": password })
-//         })
+export const createAccount = createAsyncThunk<User, Login, {rejectValue: string}>(
+    'user/createAccount',
+	async ({email, password}, thunkAPI) => {
+        const response = await fetch("http://localhost:8000/api/auth/users/", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({"email": email, "password": password })
+        })
 
-//         if (!response.ok) {
-//             return thunkAPI.rejectWithValue("something went wrong")
-//         }
+        if (!response.ok) {
+            return thunkAPI.rejectWithValue("something went wrong")
+        }
 
-//         const data = await response.json()
-//         return data
-// 	}
-// )
+        const data = await response.json()
+        return data
+	}
+)
 
 
-const initialState: Login = {
+const initialState: User = {
     email: "",
     password: "",
+    id: 0,
 }
 
 
@@ -38,8 +39,13 @@ const userSlice = createSlice({
             state.password = action.payload
         },
     },
+    extraReducers: builder => {
+        builder
+            .addCase(createAccount.fulfilled, (state, action) => {
+                state.id = action.payload.id
+            })
+    }
 })
-
 
 
 export const { setEmail, setPassword } = userSlice.actions

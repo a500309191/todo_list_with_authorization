@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk, AnyAction } from "@reduxjs/toolkit";
-import type { Task as TaskType, TasksState, Login } from "../schemas/taskSchemas"
+import type { Task as TaskType, TasksState, Login } from "../schemas/schemas"
 
 
 export const setToken = createAsyncThunk<string, Login, {rejectValue: string}>(
@@ -104,11 +104,6 @@ const taskSlice = createSlice({
                 state.isAuthenticated = true
                 state.tasks = action.payload
             })
-			.addCase(login.rejected, (state, action) => {
-                console.log("login rejected")
-                state.loading = false
-                //state.error = action.payload
-			})
             .addCase(updateTasks.pending, state  => {
                 state.error = null
             })

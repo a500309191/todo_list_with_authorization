@@ -9,7 +9,6 @@ export const AddTask = () => {
     const [body, setBody] = useState("")
     const [date, setDate] = useState("")
 
-    const tasks = useAppSelector(state => state.task.tasks)
     const dispatch = useAppDispatch()
 
     const addTask = () => {

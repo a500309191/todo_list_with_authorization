@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "../hooks"
 import { updateTasks } from "../store/taskSlice"
 import { editTask } from "../store/taskSlice"
 import { useState } from "react"
-import { Task as TaskType } from "../schemas/taskSchemas"
+import { Task as TaskType } from "../schemas/schemas"
 
 
 export const TaskEdited: React.FC<TaskType> = ({id, title, body, expiry_date, user}) => {

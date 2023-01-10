@@ -1,9 +1,8 @@
 import { Routes, Route, Link, NavLink, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { setEmail, setPassword } from "../store/userSlice"
-import { Registration } from "./Registration";
-import { Login } from "./Login";
 import { setToken } from "../store/taskSlice"
+import { createAccount } from "../store/userSlice"
 
 
 export const SignForm = () => {
@@ -26,7 +25,7 @@ export const SignForm = () => {
             <input className="sign-password" onChange={e => dispatch(setPassword(e.target.value))} />
             <div className="sign-button" onClick={() => {
                 location == "/registration"
-                    ? console.log("REGISTRATION")
+                    ? dispatch(createAccount({email, password}))
                     : dispatch(setToken({email, password}))
             }}>
                 {location == "/registration" ? "REGISTRATION" : "LOGIN"}
