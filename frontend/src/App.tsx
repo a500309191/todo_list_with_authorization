@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useAppDispatch, useAppSelector } from './hooks';
-import { login } from "./store/taskSlice"
+import { getTasks } from "./store/taskSlice"
 import { TaskList } from "./components/TaskList"
 import { SignForm } from "./components/SignForm"
 import { UserAccount } from "./components/UserAccount"
@@ -9,10 +9,10 @@ import './App.scss'
 
 export const App = () => {
   const dispatch = useAppDispatch()
-  const isAuthenticated = useAppSelector(state => state.task.isAuthenticated)
+  const isAuthenticated = useAppSelector(state => state.user.isAuthenticated)
 
   useEffect(() => {
-    dispatch(login())
+    dispatch(getTasks())
   }, [dispatch])
   
   console.log("APP STARTED")

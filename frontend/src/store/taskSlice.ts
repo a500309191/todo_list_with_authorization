@@ -2,34 +2,13 @@ import { createSlice, PayloadAction, createAsyncThunk, AnyAction } from "@reduxj
 import type { Task as TaskType, TasksState, Login } from "../schemas/schemas"
 
 
-export const setToken = createAsyncThunk<string, Login, {rejectValue: string}>(
-    'task/getToken',
-	async ({email, password}, thunkAPI) => {
-        console.log("setToken started")
-        const response = await fetch("http://localhost:8000/auth/token/login/", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({"email": email, "password": password })
-        })
 
-        if (!response.ok) {
-            return thunkAPI.rejectWithValue("something went wrong")
-        }
-
-        const data = await response.json()
-        console.log("LOGIN: ", data)
-        return data.auth_token
-	}
-)
-
-
-export const login = createAsyncThunk<TaskType[], void, {rejectValue: string}>(
-	'task/login',
+export const getTasks = createAsyncThunk<TaskType[], void, {rejectValue: string}>(
+	'task/getTasks',
 	async (_, thunkAPI) => {
         const token = localStorage.getItem('token')
         
         if (token) {
-            console.log("login started. token is catched")
             const response = await fetch('http://localhost:8000/api/tasks/', {
                 method: "GET",
                 headers: {"Authorization": `Token ${JSON.parse(token)}`}
@@ -42,13 +21,10 @@ export const login = createAsyncThunk<TaskType[], void, {rejectValue: string}>(
             const data = await response.json()
             return data
         } else {
-            console.log("login started. there is no token")
             return thunkAPI.rejectWithValue("something went wrong")
         }
     }
 )
-
-
 
 
 export const updateTasks = createAsyncThunk<TaskType[], string, {rejectValue: string}>(
@@ -69,13 +45,12 @@ export const updateTasks = createAsyncThunk<TaskType[], string, {rejectValue: st
 )
 
 
+
 const initialState: TasksState = {
-    isAuthenticated: false,
     tasks: [],
     edit: null,
     loading: true,
     error: null,
-    user_id: null,
 }
 
 
@@ -89,19 +64,11 @@ const taskSlice = createSlice({
     },
     extraReducers: builder => {
         builder
-            .addCase(setToken.fulfilled, (state, action) => {
-                state.isAuthenticated = true
-                localStorage.setItem('token', JSON.stringify(action.payload))
-            })
-            .addCase(login.pending, state  => {
-                console.log("login loading")
+            .addCase(getTasks.pending, state  => {
                 state.error = null
             })
-            .addCase(login.fulfilled, (state, action) => {
-                console.log("login fulfilled")
-                console.log(action.payload)
+            .addCase(getTasks.fulfilled, (state, action) => {
                 state.loading = false
-                state.isAuthenticated = true
                 state.tasks = action.payload
             })
             .addCase(updateTasks.pending, state  => {
@@ -109,7 +76,6 @@ const taskSlice = createSlice({
             })
             .addCase(updateTasks.fulfilled, (state, action) => {
                 state.loading = false
-                state.isAuthenticated = true
                 state.tasks = action.payload
             })
 			// .addCase(updateTasks.rejected, (state, action) => {

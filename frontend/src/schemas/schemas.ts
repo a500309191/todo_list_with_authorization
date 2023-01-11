@@ -7,6 +7,9 @@ export type User = {
     email: string
     password: string
     id: number
+    isAuthenticated: boolean
+    loading: boolean
+    error: null
 }
 
 export type Task = {
@@ -20,9 +23,7 @@ export type Task = {
 
 export type TasksState = {
     tasks: Task[]
-    isAuthenticated: boolean
     edit: null | number
     loading: boolean
     error: null
-    user_id: null | number
 }

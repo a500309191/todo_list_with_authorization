@@ -5,15 +5,15 @@ from todo_list.models import Task, User
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        # fields = '__all__'
-        exclude = "time_create", "time_update"
+        exclude = "time_create", "time_update", "user"
 
 
 class UserSerializer(serializers.ModelSerializer):
     tasks = TaskSerializer(many=True, read_only=True)
     class Meta:
         model = User
-        fields = 'tasks',
+        fields = "id", "email", "tasks", 
+
 
 
 # class UserSerializer(serializers.ModelSerializer):

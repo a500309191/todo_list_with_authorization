@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from rest_framework import generics, permissions
+from rest_framework import generics, views, permissions
+from rest_framework.response import Response
 from todo_list.models import Task, User
 from todo_list import serializers
 
@@ -22,13 +23,8 @@ class TaskListView(generics.ListCreateAPIView):
         return Task.objects.filter(user=user)
 
 
-# class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = serializers.UserSerializer
-#     # permission_classes = [permissions.IsAuthenticated]
-
-
-# class UserListView(generics.ListCreateAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = serializers.UserSerializer
-#     # permission_classes = [permissions.IsAuthenticated]
+class UserView(views.APIView):
+    def get(self, request, format=None):
+        user = User.objects.get(id=request.user.id)
+        serializer = serializers.UserSerializer(user, many=False)
+        return Response(serializer.data)

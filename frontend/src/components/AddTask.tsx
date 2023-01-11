@@ -8,7 +8,7 @@ export const AddTask = () => {
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
     const [date, setDate] = useState("")
-
+    const userId = useAppSelector(state => state.user.id)
     const dispatch = useAppDispatch()
 
     const addTask = () => {
@@ -16,7 +16,7 @@ export const AddTask = () => {
             "title": title,
             "body": body,
             "expiry_date": date,
-            "user": 2
+            "user": userId
         })
         const token = localStorage.getItem('token')
         if (token) {
