@@ -2,18 +2,11 @@ import { TaskList } from "./TaskList"
 import { AddTask } from "./AddTask"
 import { PersonalData } from "./PersonalData"
 import { useAppSelector, useAppDispatch } from "../hooks"
-import { getTasks } from "../store/taskSlice"
+import { getUserData } from "../store/userSlice"
 import { useEffect } from "react"
 
 
 export const UserAccount = () => {
-
-    const dispatch = useAppDispatch()
-
-    useEffect(() => {
-        dispatch(getTasks())
-      }, [dispatch])
-
 
     return (
         <div className="user-account">

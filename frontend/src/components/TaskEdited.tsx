@@ -1,12 +1,13 @@
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { updateTasks } from "../store/taskSlice"
+import { updateUserData } from "../store/userSlice"
 import { editTask } from "../store/taskSlice"
 import { useState } from "react"
 import { Task as TaskType } from "../schemas/schemas"
 
 
-export const TaskEdited: React.FC<TaskType> = ({id, title, body, expiry_date, user}) => {
-    const edit = useAppSelector(state => state.task.edit)
+export const TaskEdited: React.FC<TaskType> = ({id, title, body, expiry_date}) => {
+    const edit = useAppSelector(state => state.task.editableTask)
+    const user_id = useAppSelector(state => state.user.id)
     const dispatch = useAppDispatch()
 
     const [updatedTitle, setTitle] = useState("")
@@ -20,7 +21,7 @@ export const TaskEdited: React.FC<TaskType> = ({id, title, body, expiry_date, us
                 "title": updatedTitle ? updatedTitle : title,
                 "body": updatedBody ? updatedBody : body,
                 "expiry_date": updatedExpiryDate ? updatedExpiryDate : expiry_date,
-                "user": user
+                "user": user_id
             })
             const token = localStorage.getItem('token')
             if (token) {
@@ -33,7 +34,7 @@ export const TaskEdited: React.FC<TaskType> = ({id, title, body, expiry_date, us
                     body: req_body
                 })
                 .then(res => console.log("UPDATE TASK RESPONSE: ", res))
-                .then(() => dispatch(updateTasks(token)))
+                .then(() => dispatch(updateUserData(token)))
                 .then(() => {
                     setTitle("")
                     setBody("")

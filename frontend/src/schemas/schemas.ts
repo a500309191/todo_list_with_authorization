@@ -3,27 +3,35 @@ export type Login = {
     password: string
 }
 
-export type User = {
-    email: string
-    password: string
-    id: number
-    isAuthenticated: boolean
-    loading: boolean
-    error: null
-}
-
 export type Task = {
     id: number
     title: string
     body: string
     expiry_date: string
     is_done: boolean
-    user: number
 }
 
-export type TasksState = {
+export type Tasks = {
+    tasks: Task[]
+}
+
+export type User = {
+    email: string
+    password: string
+    id: number
     tasks: Task[]
     edit: null | number
+    isAuthenticated: boolean
     loading: boolean
     error: null
 }
+
+export type CreateUser = {
+    email: string
+    id: number
+}
+
+export type TaskState = {
+    editableTask: null | number
+}
+

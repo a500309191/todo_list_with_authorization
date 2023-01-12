@@ -1,12 +1,12 @@
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { updateTasks } from "../store/taskSlice"
+import { updateUserData } from "../store/userSlice"
 import { editTask } from "../store/taskSlice"
 import { Task as TaskType } from "../schemas/schemas"
 
 
 
 export const Task: React.FC<TaskType> = ({id, title, body, expiry_date}) => {
-    const edit = useAppSelector(state => state.task.edit)
+    const edit = useAppSelector(state => state.task.editableTask)
     const dispatch = useAppDispatch()
     
     
@@ -33,7 +33,7 @@ export const Task: React.FC<TaskType> = ({id, title, body, expiry_date}) => {
                 }
             })
             .then(res => console.log("DELETE TASK RESPONSE: ", res))
-            .then(() => dispatch(updateTasks(token)))
+            .then(() => dispatch(updateUserData(token)))
         } else {
             console.log("there is no token")
         }

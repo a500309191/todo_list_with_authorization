@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../hooks"
-import { updateTasks } from "../store/taskSlice"
+import { updateUserData } from "../store/userSlice"
 
 
 export const AddTask = () => {
@@ -29,7 +29,7 @@ export const AddTask = () => {
                 body: req_body
             })
             .then(res => console.log("ADD TASK RESPONSE: ", res))
-            .then(() => dispatch(updateTasks(token)))
+            .then(() => dispatch(updateUserData(token)))
         } else {
             console.log("there is no token")
         }

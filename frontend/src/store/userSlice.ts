@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction, createAsyncThunk, AnyAction } from "@reduxjs/toolkit";
-import type { Login, User, Task as TaskType, TasksState } from "../schemas/schemas"
+import type { Login, User, CreateUser, Task as TaskType } from "../schemas/schemas"
 
 
-export const setToken = createAsyncThunk<User, Login, {rejectValue: string}>(
+
+
+export const setToken = createAsyncThunk<string, Login, {rejectValue: string}>(
     'task/setToken',
 	async ({email, password}, thunkAPI) => {
         const response = await fetch("http://localhost:8000/auth/token/login/", {
@@ -16,14 +18,59 @@ export const setToken = createAsyncThunk<User, Login, {rejectValue: string}>(
         }
 
         const data = await response.json()
-        console.log("LOGIN: ", data)
         return data.auth_token
 	}
 )
 
 
+export const getUserData = createAsyncThunk<User, void, {rejectValue: string}>(
+	'user/getUserData',
+	async (_, thunkAPI) => {
+        console.log("getUserData")
+        const token = localStorage.getItem('token')
+        
+        if (token) {
+            const response = await fetch('http://localhost:8000/api/user/', {
+                method: "GET",
+                headers: {"Authorization": `Token ${JSON.parse(token)}`}
+            });
+            
+            if (!response.ok) {
+                return thunkAPI.rejectWithValue("something went wrong")
+            }
 
-export const createAccount = createAsyncThunk<User, Login, {rejectValue: string}>(
+            const data = await response.json()
+            return data
+        } else {
+            return thunkAPI.rejectWithValue("something went wrong")
+        }
+    }
+)
+
+
+export const updateUserData = createAsyncThunk<User, string, {rejectValue: string}>(
+    'user/updateTasks',
+    async (token, thunkAPI) => {
+        console.log("updateUserData")
+        const response = await fetch('http://localhost:8000/api/user/', {
+            method: "GET",
+            headers: {"Authorization": `Token ${JSON.parse(token)}`}
+        });
+        
+        if (!response.ok) {
+            return thunkAPI.rejectWithValue("something went wrong")
+        }
+
+        const data = await response.json()
+        return data
+    }
+)
+
+
+
+
+
+export const createAccount = createAsyncThunk<CreateUser, Login, {rejectValue: string}>(
     'user/createAccount',
 	async ({email, password}, thunkAPI) => {
         const response = await fetch("http://localhost:8000/api/auth/users/", {
@@ -49,6 +96,8 @@ const initialState: User = {
     isAuthenticated: false,
     loading: true,
     error: null,
+    tasks: [],
+    edit: null
 }
 
 
@@ -62,6 +111,13 @@ const userSlice = createSlice({
         setPassword(state, action) {
             state.password = action.payload
         },
+        logOut(state) {
+            localStorage.removeItem("token")
+            state.isAuthenticated = false
+            state.tasks = []
+            state.password = ""
+            state.email = ""
+        }
     },
     extraReducers: builder => {
         builder
@@ -71,13 +127,34 @@ const userSlice = createSlice({
                 state.email = action.payload.email
             })
             .addCase(setToken.fulfilled, (state, action) => {
-                console.log("SET TOKEN")
                 localStorage.setItem('token', JSON.stringify(action.payload))
                 state.isAuthenticated = true
+                state.password = ""
+                state.email = ""
+            })
+            .addCase(getUserData.pending, state  => {
+                state.error = null
+            })
+            .addCase(getUserData.fulfilled, (state, action) => {
+                console.log("GET USER DATA: ", action.payload)
+                state.loading = false
+                state.tasks = action.payload.tasks
+                state.email = action.payload.email
+                state.id = action.payload.id
+                state.isAuthenticated = true
+            })
+            .addCase(updateUserData.pending, state  => {
+                state.error = null
+            })
+            .addCase(updateUserData.fulfilled, (state, action) => {
+                state.loading = false
+                state.tasks = action.payload.tasks
+                state.email = action.payload.email
+                state.id = action.payload.id
             })
     }
 })
 
 
-export const { setEmail, setPassword } = userSlice.actions
+export const { setEmail, setPassword, logOut } = userSlice.actions
 export default userSlice.reducer

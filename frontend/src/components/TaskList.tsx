@@ -5,7 +5,8 @@ import { TaskEdited } from "./TaskEdited"
 
 
 export const TaskList = () => {
-    const tasks = useAppSelector(state => state.task.tasks)
+    const tasks = useAppSelector(state => state.user.tasks)
+    console.log(tasks)
 
     return (
         <div className="tasks">

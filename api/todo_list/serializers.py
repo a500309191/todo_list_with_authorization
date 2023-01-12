@@ -5,7 +5,11 @@ from todo_list.models import Task, User
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        exclude = "time_create", "time_update", "user"
+        exclude = "time_create", "time_update"
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data.pop("user")
+        return data
 
 
 class UserSerializer(serializers.ModelSerializer):
