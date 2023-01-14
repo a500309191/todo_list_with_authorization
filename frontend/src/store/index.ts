@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from 'redux'
-import taskReducer from "./taskSlice";
+import taskReducer from "./editSlice";
 import userReducer from "./userSlice";
 // import taskReducer from "./taskSlice";
 // import userReducer from "./userSlice";

@@ -90,7 +90,7 @@ export const createAccount = createAsyncThunk<CreateUser, Login, {rejectValue: s
 
 
 const initialState: User = {
-    email: "",
+    email: "test1@gmail.com",
     password: "",
     id: 0,
     isAuthenticated: false,
@@ -129,8 +129,6 @@ const userSlice = createSlice({
             .addCase(setToken.fulfilled, (state, action) => {
                 localStorage.setItem('token', JSON.stringify(action.payload))
                 state.isAuthenticated = true
-                state.password = ""
-                state.email = ""
             })
             .addCase(getUserData.pending, state  => {
                 state.error = null
@@ -142,6 +140,7 @@ const userSlice = createSlice({
                 state.email = action.payload.email
                 state.id = action.payload.id
                 state.isAuthenticated = true
+                state.password = ""
             })
             .addCase(updateUserData.pending, state  => {
                 state.error = null

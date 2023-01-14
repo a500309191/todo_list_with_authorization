@@ -31,7 +31,8 @@ export type CreateUser = {
     id: number
 }
 
-export type TaskState = {
+export type EditState = {
     editableTask: null | number
+    settings: boolean
 }
 

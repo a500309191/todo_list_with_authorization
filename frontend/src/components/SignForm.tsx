@@ -21,8 +21,8 @@ export const SignForm = () => {
                 <Link to="/" className="log-button">LOGIN</Link>
                 <Link to="/registration" className="reg-button">REGISTRATION</Link>
             </div>
-            <input className="sign-email" onChange={e => dispatch(setEmail(e.target.value))} />
-            <input className="sign-password" onChange={e => dispatch(setPassword(e.target.value))} />
+            <input defaultValue={email} className="sign-email" onChange={e => dispatch(setEmail(e.target.value))} />
+            <input type="password" defaultValue={password} className="sign-password" onChange={e => dispatch(setPassword(e.target.value))} />
             <div className="sign-button" onClick={() => {
                 location == "/registration"
                     ? dispatch(createAccount({email, password}))

@@ -119,12 +119,29 @@ div * {
 
 
 
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
 
 
 
-
-
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 20px
+}
+.header > div {
+  font-size: 14px;
+  opacity: 0.7;
+}
+.header-settings,
+.header-logout {
+  cursor: pointer;
+  justify-self: right;
+}
 
 
 
@@ -155,6 +172,7 @@ div * {
 .add-task {
   display: flex;
   flex-direction: column;
+  gap: 6px;
 }
 
 
@@ -172,12 +190,12 @@ div * {
   grid-area: task;
   display: grid;
   grid-template-columns: 150px auto auto;
-  grid-template-rows: 25px auto 20px;
+  grid-template-rows: 22px auto 18px;
   grid-template-areas:
     'title title title'
     'body body body'
     'date . buttons';
-  row-gap: 6px;
+  row-gap: 3px;
 }
 
 .task-title,
@@ -185,7 +203,7 @@ div * {
   display: flex;
   align-items: center;
   grid-area: title;
-  font-size: 20px;
+  font-size: 16px;
   padding: 5px;
   background-color: $gray;
 }
@@ -207,6 +225,7 @@ div * {
   justify-content: center;
   align-items: center;
   text-align: center;
+  font-size: 14px;
   background-color: $gray;
 }
 .task-buttons {
@@ -233,14 +252,14 @@ div * {
   align-items: center;
   text-align: center;
   cursor: pointer;
-  transition-duration: 0.1s;
+  transition-duration: 0.15s;
   font-size: 14px;
 }
 .task-button-edit:hover,
 .task-button-accept:hover,
 .task-button-delete:hover,
 .task-button-cancel:hover {
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .task-title-edit,
@@ -266,4 +285,23 @@ div * {
 
 .outdated {
   background-color: rgba(255, 0, 0, 0.5);
+}
+
+
+
+
+
+
+
+
+
+
+.add-task-body {
+  resize: none;
+  height: 40px;
+}
+
+.add-task-button {
+  @include button($h: 30px);
+  
 }
