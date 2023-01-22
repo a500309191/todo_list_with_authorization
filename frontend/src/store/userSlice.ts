@@ -90,10 +90,11 @@ export const createAccount = createAsyncThunk<CreateUser, Login, {rejectValue: s
 
 
 const initialState: User = {
-    email: "test1@gmail.com",
+    email: "a500309191@gmail.com",
     password: "",
     id: 0,
     isAuthenticated: false,
+    isActivated: false,
     loading: true,
     error: null,
     tasks: [],

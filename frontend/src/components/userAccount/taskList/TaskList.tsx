@@ -1,4 +1,4 @@
-import { useAppSelector, useAppDispatch } from "../hooks"
+import { useAppSelector, useAppDispatch } from "../../../hooks"
 import { useEffect } from "react"
 import { Task } from "./Task"
 import { TaskEdited } from "./TaskEdited"

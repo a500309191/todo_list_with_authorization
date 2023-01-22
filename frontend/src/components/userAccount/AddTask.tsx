@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useAppSelector, useAppDispatch } from "../hooks"
-import { updateUserData } from "../store/userSlice"
+import { useAppSelector, useAppDispatch } from "../../hooks"
+import { updateUserData } from "../../store/userSlice"
 
 
 export const AddTask = () => {

@@ -1,7 +1,7 @@
-import { useAppDispatch, useAppSelector } from "../hooks"
-import { updateUserData } from "../store/userSlice"
-import { editTask } from "../store/editSlice"
-import { Task as TaskType } from "../schemas/schemas"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { updateUserData } from "../../../store/userSlice"
+import { editTask } from "../../../store/editSlice"
+import { Task as TaskType } from "../../../schemas/schemas"
 
 
 

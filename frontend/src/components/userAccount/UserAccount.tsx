@@ -1,8 +1,8 @@
-import { TaskList } from "./TaskList"
+import { TaskList } from "./taskList/TaskList"
 import { AddTask } from "./AddTask"
 import { Header } from "./Header"
-import { useAppSelector, useAppDispatch } from "../hooks"
-import { getUserData } from "../store/userSlice"
+import { useAppSelector, useAppDispatch } from "../../hooks"
+import { getUserData } from "../../store/userSlice"
 import { useEffect } from "react"
 
 

@@ -22,6 +22,7 @@ export type User = {
     tasks: Task[]
     edit: null | number
     isAuthenticated: boolean
+    isActivated: boolean
     loading: boolean
     error: null
 }

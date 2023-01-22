@@ -1,6 +1,6 @@
-import { useAppDispatch, useAppSelector } from "../hooks"
-import { logOut } from "../store/userSlice"
-import { settingsOpen } from "../store/editSlice"
+import { useAppDispatch, useAppSelector } from "../../hooks"
+import { logOut } from "../../store/userSlice"
+import { settingsOpen } from "../../store/editSlice"
 import { Settings } from "./Settings"
  
 
