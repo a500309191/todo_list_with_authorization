@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react"
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, redirect, useLocation, Navigate, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from './hooks';
 import { getUserData } from "./store/userSlice"
 import { SignForm } from "./components/SignForm"
 import { UserAccount } from "./components/userAccount/UserAccount"
 import { PageNotFound } from "./components/PageNotFound"
-import { UserActivate } from "./components/UserActivate";
+import { UserActivate } from "./components/activation/UserActivate";
 import './App.scss'
+import { Layout } from "./components/Layout";
 
 
 export const App = () => {
@@ -16,7 +17,17 @@ export const App = () => {
   useEffect(() => {
     dispatch(getUserData())
   }, [dispatch])
-  
+
+
+
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (isAuthenticated) {
+      return navigate('/account')
+    }
+  }, [isAuthenticated])
+
+
   console.log("isAuthenticated: ", isAuthenticated)
 
   return (

@@ -66,10 +66,12 @@ div * {
 
 
 
-
-// .x {
-//   background-color: $dark_gray;
-// }
+.activation-message {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
 
 

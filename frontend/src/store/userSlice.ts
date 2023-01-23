@@ -3,7 +3,6 @@ import type { Login, User, CreateUser, Task as TaskType } from "../schemas/schem
 
 
 
-
 export const setToken = createAsyncThunk<string, Login, {rejectValue: string}>(
     'task/setToken',
 	async ({email, password}, thunkAPI) => {
@@ -129,6 +128,8 @@ const userSlice = createSlice({
             })
             .addCase(setToken.fulfilled, (state, action) => {
                 localStorage.setItem('token', JSON.stringify(action.payload))
+                let x = localStorage.getItem('token')
+                console.log("TEST: ", x)
                 state.isAuthenticated = true
             })
             .addCase(getUserData.pending, state  => {

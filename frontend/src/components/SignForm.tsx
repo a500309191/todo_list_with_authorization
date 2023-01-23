@@ -1,4 +1,4 @@
-import { Routes, Route, Link, NavLink, useLocation } from "react-router-dom";
+import { Routes, Route, Link, NavLink, useLocation, redirect } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { setEmail, setPassword } from "../store/userSlice"
 import { setToken } from "../store/userSlice"
@@ -30,6 +30,7 @@ export const SignForm = () => {
             }}>
                 {location == "/registration" ? "REGISTRATION" : "LOGIN"}
             </div>
+            <Link to="/account" onClick={() => console.log("AS")}>TEST</Link>
         </div>
     )
 }

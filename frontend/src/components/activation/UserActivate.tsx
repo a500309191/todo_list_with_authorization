@@ -1,10 +1,12 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState  } from "react";
+import { useEffect, useState } from "react";
+import { ActivationSuccess } from "./ActivationSuccess";
+import { ActivationFailed } from "./ActivationFailed";
+
 
 export const UserActivate = () => {
 
     const {uid, token} = useParams();
-    console.log(uid, token)
     const [success, setSuccess] = useState(true)
 
 	async function userActivate() {
@@ -21,6 +23,11 @@ export const UserActivate = () => {
 
 
     return (
-        <div>{success ? "SUCCESS" : "NOT SUCCESS"}</div>
+        <div className="activation-message">
+            {success
+                ? <ActivationSuccess />
+                : <ActivationFailed />
+            }
+        </div>
     )
 }
