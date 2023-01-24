@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk, AnyAction } from "@reduxjs/toolkit";
-import type { Login, User, CreateUser, Task as TaskType } from "../schemas/schemas"
+import type { Login, User, CreateUser, ActivateUser, Task as TaskType } from "../schemas/schemas"
 
 
 
@@ -40,6 +40,7 @@ export const getUserData = createAsyncThunk<User, void, {rejectValue: string}>(
 
             const data = await response.json()
             return data
+
         } else {
             return thunkAPI.rejectWithValue("something went wrong")
         }
@@ -85,6 +86,23 @@ export const createAccount = createAsyncThunk<CreateUser, Login, {rejectValue: s
         const data = await response.json()
         return data
 	}
+)
+
+
+export const activateUser = createAsyncThunk<void, ActivateUser, {rejectValue: string}>(
+    'user/activateUser',
+    async ({uid, token}, thunkAPI) => {
+        const response = await fetch("http://localhost:8000/api/auth/users/activation/", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({"uid": uid, "token": token })
+        })
+        console.log("activation response: ", response)
+
+        if (!response.ok) {
+            return thunkAPI.rejectWithValue("something went wrong")
+        }
+    }
 )
 
 
@@ -142,16 +160,29 @@ const userSlice = createSlice({
                 state.email = action.payload.email
                 state.id = action.payload.id
                 state.isAuthenticated = true
+                state.isActivated = true
                 state.password = ""
             })
             .addCase(updateUserData.pending, state  => {
                 state.error = null
+                state.loading = true
             })
             .addCase(updateUserData.fulfilled, (state, action) => {
                 state.loading = false
                 state.tasks = action.payload.tasks
                 state.email = action.payload.email
                 state.id = action.payload.id
+            })
+            .addCase(activateUser.pending, state  => {
+                state.error = null
+                state.loading = true
+            })
+            .addCase(activateUser.fulfilled, state => {
+                state.isActivated = true
+                state.loading = false
+            })
+            .addCase(activateUser.rejected, state => {
+                state.loading = false
             })
     }
 })

@@ -32,6 +32,11 @@ export type CreateUser = {
     id: number
 }
 
+export type ActivateUser = {
+    uid: string
+    token: string
+}
+
 export type EditState = {
     editableTask: null | number
     settings: boolean

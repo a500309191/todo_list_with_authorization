@@ -11,7 +11,7 @@ export const SignForm = () => {
     const dispatch = useAppDispatch()
     const email = useAppSelector(state => state.user.email)
     const password = useAppSelector(state => state.user.password)
-
+    
     return (
         <div className="sign-form">
             <div
@@ -30,7 +30,6 @@ export const SignForm = () => {
             }}>
                 {location == "/registration" ? "REGISTRATION" : "LOGIN"}
             </div>
-            <Link to="/account" onClick={() => console.log("AS")}>TEST</Link>
         </div>
     )
 }
