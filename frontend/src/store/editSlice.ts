@@ -8,14 +8,14 @@ const initialState: EditState = {
 }
 
 const editSlice = createSlice({
-    name: "task",
+    name: "edit",
     initialState,
     reducers: {
         editTask(state, action) {
             state.editableTask = action.payload
         },
         settingsOpen(state) {
-            state.settings = true
+            state.settings = !state.settings
         },
     },
 })

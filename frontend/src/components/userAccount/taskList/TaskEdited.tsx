@@ -6,7 +6,7 @@ import { Task as TaskType } from "../../../schemas/schemas"
 
 
 export const TaskEdited: React.FC<TaskType> = ({id, title, body, expiry_date}) => {
-    const edit = useAppSelector(state => state.task.editableTask)
+    const edit = useAppSelector(state => state.edit.editableTask)
     const user_id = useAppSelector(state => state.user.id)
     const dispatch = useAppDispatch()
 

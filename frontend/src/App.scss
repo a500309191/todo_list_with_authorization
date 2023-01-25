@@ -136,7 +136,7 @@ div * {
 
 .sign-button {
   @include button($h: 30px);
-}
+}button
 
 
 
@@ -165,12 +165,18 @@ div * {
   font-size: 14px;
   opacity: 0.7;
 }
-.settings-edit,
-.settings-logout {
+.settings-edit-button,
+.settings-logout-button {
   cursor: pointer;
   justify-self: right;
 }
 
+
+.settings-edit-password-input {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
 
 
 

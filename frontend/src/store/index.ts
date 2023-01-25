@@ -16,7 +16,7 @@ import userReducer from "./userSlice";
 
 const store = configureStore({
     reducer: {
-        task: taskReducer,
+        edit: taskReducer,
         user: userReducer,
     },
 })

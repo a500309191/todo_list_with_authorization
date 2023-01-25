@@ -37,6 +37,12 @@ export type ActivateUser = {
     token: string
 }
 
+export type ResetPassword = {
+    newPassword: string
+    reNewPassword: string
+    currentPassword: string
+}
+
 export type EditState = {
     editableTask: null | number
     settings: boolean

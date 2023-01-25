@@ -11,8 +11,7 @@ import './App.scss'
 
 export const App = () => {
   const dispatch = useAppDispatch()
-  const isAuthenticated = useAppSelector(state => state.user.isAuthenticated)
-  const isActivated = useAppSelector(state => state.user.isActivated)
+  const userState = useAppSelector(state => state.user)
 
   useEffect(() => {
     dispatch(getUserData())
@@ -21,14 +20,13 @@ export const App = () => {
 
   const navigate = useNavigate()
   useEffect(() => {
-    if (isAuthenticated) {
+    if (userState.isAuthenticated) {
       return navigate('/account')
     }
-  }, [isAuthenticated])
+  }, [userState.isAuthenticated])
 
 
-  console.log("isAuthenticated: ", isAuthenticated)
-  console.log("isActivated: ", isActivated)
+  console.log("isAuthenticated: ", userState.isAuthenticated)
 
   return (
     <div className="app">

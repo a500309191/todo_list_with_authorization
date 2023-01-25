@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk, AnyAction } from "@reduxjs/toolkit";
-import type { Login, User, CreateUser, ActivateUser, Task as TaskType } from "../schemas/schemas"
+import type { Login, User, CreateUser, ActivateUser, ResetPassword, Task as TaskType } from "../schemas/schemas"
 
 
 
@@ -68,8 +68,6 @@ export const updateUserData = createAsyncThunk<User, string, {rejectValue: strin
 
 
 
-
-
 export const createAccount = createAsyncThunk<CreateUser, Login, {rejectValue: string}>(
     'user/createAccount',
 	async ({email, password}, thunkAPI) => {
@@ -95,7 +93,7 @@ export const activateUser = createAsyncThunk<void, ActivateUser, {rejectValue: s
         const response = await fetch("http://localhost:8000/api/auth/users/activation/", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({"uid": uid, "token": token })
+            body: JSON.stringify({ "uid": uid, "token": token })
         })
         console.log("activation response: ", response)
 
@@ -105,6 +103,26 @@ export const activateUser = createAsyncThunk<void, ActivateUser, {rejectValue: s
     }
 )
 
+
+export const resetPassword = createAsyncThunk<void, ResetPassword, {rejectValue: string}>(
+    'user/activateUser',
+    async ({newPassword, reNewPassword, currentPassword}, thunkAPI) => {
+        const response = await fetch("http://localhost:8000/api/auth/users/set_password/", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                "new_password": newPassword,
+                "re_new_password": reNewPassword,
+                "current_password": currentPassword,
+            })
+        })
+        console.log("password reset response: ", response)
+
+        if (!response.ok) {
+            return thunkAPI.rejectWithValue("something went wrong")
+        }
+    }
+)
 
 const initialState: User = {
     email: "a500309191@gmail.com",
