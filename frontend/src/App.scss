@@ -102,6 +102,8 @@ div * {
 
 
 
+
+
 .sign-form {
   display: flex;
   flex-direction: column;
@@ -136,32 +138,33 @@ div * {
 
 .sign-button {
   @include button($h: 30px);
-}button
+}
 
 
 
 
 
 
-
+.user-account {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 
 
 
 .settings {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 4px;
 }
 
-
-
-
-.settings {
+.settings-bar {
   display: grid;
   grid-template-columns: 1fr auto auto;
   gap: 20px
 }
-.settings > div {
+.settings-bar > div {
   font-size: 14px;
   opacity: 0.7;
 }
@@ -171,6 +174,36 @@ div * {
   justify-self: right;
 }
 
+.settings-edit {
+  position: relative;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition-duration: 0.3s;
+}
+
+.settings-edit-password-button,
+.settings-edit-password,
+.settings-edit-user-button,
+.settings-edit-user {
+  display: flex;
+  //justify-content: center;
+  //align-items: center;
+  cursor: pointer;
+}
+.settings-edit-user-button {
+  position: relative;
+  top: 0px;
+  transition-duration: 0.3s;
+}
+
+.settings-edit-password,
+.settings-edit-user {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
 
 .settings-edit-password-input {
   display: flex;
@@ -178,7 +211,19 @@ div * {
   gap: 15px;
 }
 
-
+.settings-edit-password-buttons,
+.settings-edit-user-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+.settings-edit-password-buttons > div,
+.settings-edit-user-buttons > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
 
 
 
@@ -194,11 +239,6 @@ div * {
 
 
 
-.user-account {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
 
 
 
@@ -321,8 +361,11 @@ div * {
   background-color: rgba(255, 0, 0, 0.5);
 }
 
-
-
+.wrapped {
+  position: relative;
+  top: -20px;
+  transition-duration: 0.3;
+}
 
 
 

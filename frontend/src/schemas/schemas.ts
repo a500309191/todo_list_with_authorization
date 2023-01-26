@@ -43,8 +43,14 @@ export type ResetPassword = {
     currentPassword: string
 }
 
+export type DeleteUser = {
+    password: string
+}
+
 export type EditState = {
     editableTask: null | number
-    settings: boolean
+    settingsToggle: boolean
+    resetPasswordToggle: boolean
+    deleteUserToggle: boolean
 }
 

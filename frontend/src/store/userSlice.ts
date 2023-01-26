@@ -1,5 +1,13 @@
 import { createSlice, PayloadAction, createAsyncThunk, AnyAction } from "@reduxjs/toolkit";
-import type { Login, User, CreateUser, ActivateUser, ResetPassword, Task as TaskType } from "../schemas/schemas"
+import type {
+    Login,
+    User,
+    CreateUser,
+    ActivateUser,
+    ResetPassword,
+    DeleteUser,
+    Task as TaskType
+} from "../schemas/schemas"
 
 
 
@@ -105,24 +113,54 @@ export const activateUser = createAsyncThunk<void, ActivateUser, {rejectValue: s
 
 
 export const resetPassword = createAsyncThunk<void, ResetPassword, {rejectValue: string}>(
-    'user/activateUser',
+    'user/resetPassword',
     async ({newPassword, reNewPassword, currentPassword}, thunkAPI) => {
-        const response = await fetch("http://localhost:8000/api/auth/users/set_password/", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                "new_password": newPassword,
-                "re_new_password": reNewPassword,
-                "current_password": currentPassword,
+        const token = localStorage.getItem('token')
+        if (token) {
+            const response = await fetch("http://localhost:8000/api/auth/users/set_password/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Token ${JSON.parse(token)}`
+                },
+                body: JSON.stringify({
+                    "new_password": newPassword,
+                    "re_new_password": reNewPassword,
+                    "current_password": currentPassword,
+                })
             })
-        })
-        console.log("password reset response: ", response)
+            console.log("password reset response: ", response)
 
-        if (!response.ok) {
-            return thunkAPI.rejectWithValue("something went wrong")
+            if (!response.ok) {
+                return thunkAPI.rejectWithValue("something went wrong")
+            }
         }
     }
 )
+
+
+export const deleteUser = createAsyncThunk<void, DeleteUser, {rejectValue: string}>(
+    'user/deleteUser',
+    async ({password}, thunkAPI) => {
+        const token = localStorage.getItem('token')
+        if (token) {
+            const response = await fetch("http://localhost:8000/api/auth/users/me/", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Token ${JSON.parse(token)}`
+                },
+                body: JSON.stringify({ "current_password": password })
+            })
+            console.log("delete user response: ", response)
+
+            if (!response.ok) {
+                return thunkAPI.rejectWithValue("something went wrong")
+            }
+        }
+    }
+)
+
 
 const initialState: User = {
     email: "a500309191@gmail.com",
