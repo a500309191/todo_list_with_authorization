@@ -11,8 +11,12 @@ export const DeleteUser = () => {
 
 
     return (
-        <div className="settings-edit-user">
-            <div className="settings-edit-password-input">
+        <div className={`${editState.deleteUserToggle
+            ? "settings-edit-user-input"
+            : "settings-edit-user-input pushed"}`}
+        >
+
+            <div className="settings-edit-password-inputs">
                 <input
                     placeholder="password" 
                     type="password"

@@ -13,8 +13,11 @@ export const ResetPassword = () => {
     const [currentPassword, setCurrentPassword] = useState("")
 
     return (
-        <div className="settings-edit-password">
-            <div className="settings-edit-password-input">
+        <div className={`${editState.resetPasswordToggle
+            ? "settings-edit-password-input"
+            : "settings-edit-password-input pushed"}`}
+        >
+            <div className="settings-edit-password-inputs">
                 <input
                     placeholder="new password" 
                     type="password"

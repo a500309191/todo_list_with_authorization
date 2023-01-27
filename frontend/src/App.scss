@@ -157,14 +157,19 @@ div * {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  height: 100%;
+  transition-duration: 0.5s;
 }
-
 .settings-bar {
   display: grid;
   grid-template-columns: 1fr auto auto;
-  gap: 20px
+  gap: 20px;
+  height: 20px;
+  z-index: 2;
 }
 .settings-bar > div {
+  display: flex;
+  align-items: center;
   font-size: 14px;
   opacity: 0.7;
 }
@@ -180,32 +185,47 @@ div * {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  transition-duration: 0.3s;
+  transition-duration: 0.5s;
+  z-index: 1;
+}
+.settings-edit > div {
+  height: 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.settings-edit-password,
+.settings-edit-user {
+  display: flex;
+  gap: 20px;
+  position: relative;
 }
 
 .settings-edit-password-button,
-.settings-edit-password,
-.settings-edit-user-button,
-.settings-edit-user {
+.settings-edit-user-button {
+  position: absolute;
+  left: 0;
   display: flex;
-  //justify-content: center;
-  //align-items: center;
+  align-items: center;
   cursor: pointer;
 }
 .settings-edit-user-button {
-  position: relative;
   top: 0px;
-  transition-duration: 0.3s;
+  transition-duration: 0.5s;
 }
 
-.settings-edit-password,
-.settings-edit-user {
+.settings-edit-password-input,
+.settings-edit-user-input {
+  position: relative;
+  left: 0px;
   display: flex;
   flex-direction: row;
   gap: 15px;
+  transition-duration: 0.3s;
 }
 
-.settings-edit-password-input {
+.settings-edit-password-inputs {
   display: flex;
   flex-direction: row;
   gap: 15px;
@@ -362,13 +382,20 @@ div * {
 }
 
 .wrapped {
-  position: relative;
-  top: -20px;
-  transition-duration: 0.3;
+  top: -24px;
+  transition-duration: 0.5s;
+  opacity: 0;
 }
 
+.shrunk {
+  height: 20px;
+}
 
-
+.pushed {
+  transition-duration: 0.3s;
+  left: -100%;
+  opacity: 0;
+}
 
 
 
