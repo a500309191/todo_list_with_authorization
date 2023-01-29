@@ -1,12 +1,12 @@
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { updateUserData } from "../../../store/userSlice"
-import { editTask } from "../../../store/editSlice"
+import { editTask, selectTask } from "../../../store/editSlice"
 import { Task as TaskType } from "../../../schemas/schemas"
 
 
 
 export const Task: React.FC<TaskType> = ({id, title, body, expiry_date}) => {
-    const edit = useAppSelector(state => state.edit.editableTask)
+    const editState = useAppSelector(state => state.edit)
     const dispatch = useAppDispatch()
     
     
@@ -41,7 +41,12 @@ export const Task: React.FC<TaskType> = ({id, title, body, expiry_date}) => {
 
 
     return (
-        <div className={`task ${edit === id ? "hide" : ""} ${expiryDateStamp < nowDateStamp ? "outdated" : ""}`}>
+        <div
+            className=
+                {`task ${editState.editableTask === id ? "hide" : ""} 
+                ${expiryDateStamp < nowDateStamp ? "outdated" : ""}`}
+            onClick={() => dispatch(selectTask(id))}
+        >
             <div className="task-title">{title}</div>
             <div className="task-body">{body}</div>
             <div className="task-date">{D}.{M}.{Y} / {h}:{m}</div>

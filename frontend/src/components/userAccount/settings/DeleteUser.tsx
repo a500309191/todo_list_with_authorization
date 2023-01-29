@@ -13,7 +13,7 @@ export const DeleteUser = () => {
     return (
         <div className={`${editState.deleteUserToggle
             ? "settings-edit-user-input"
-            : "settings-edit-user-input pushed"}`}
+            : "settings-edit-user-input hide"}`}
         >
 
             <div className="settings-edit-password-inputs">

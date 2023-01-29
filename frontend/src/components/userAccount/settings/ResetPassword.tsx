@@ -15,7 +15,7 @@ export const ResetPassword = () => {
     return (
         <div className={`${editState.resetPasswordToggle
             ? "settings-edit-password-input"
-            : "settings-edit-password-input pushed"}`}
+            : "settings-edit-password-input hide"}`}
         >
             <div className="settings-edit-password-inputs">
                 <input

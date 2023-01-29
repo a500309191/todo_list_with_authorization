@@ -72,7 +72,7 @@ div * {
 .window {
   display: grid;
   grid-template-columns: 20% auto 20%;
-  grid-template-rows: 50px 1fr 20%;
+  grid-template-rows: 25px 1fr 20%;
   grid-template-areas:
     '. . .'
     '. app .'
@@ -82,11 +82,21 @@ div * {
 .app {
   grid-area: app;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-self: center;
+  max-width: 800px;
 }
 
 
+
+
+
+.user-account {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
+  height: 90vh;
+}
 
 
 
@@ -115,7 +125,6 @@ div * {
   display: flex;
   background: linear-gradient(90deg, $gray 0 calc(100%/3), $dark_gray calc(100%/3) calc(100%/3*2), $gray calc(100%/3*2) 100%);
   background-size: 150%;
-  //background-position: right;
   transition-duration: 0.15s;
 }
 .sign-tumbler > a {
@@ -145,19 +154,11 @@ div * {
 
 
 
-.user-account {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-
-
 .settings {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  height: 100%;
+  height: 10%;
   transition-duration: 0.5s;
 }
 .settings-bar {
@@ -253,6 +254,9 @@ div * {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  height: 100%;
+  justify-self: top;
+  overflow-y: scroll;
 }
 
 
@@ -290,6 +294,14 @@ div * {
     'body body body'
     'date . buttons';
   row-gap: 3px;
+  padding: 3px;
+  border: 3px solid rgba(255, 255, 255, 0.0);
+  transition-duration: 0.3s;
+}
+
+.task:hover {
+  border: 3px solid $red;
+  transition-duration: 0.3s;
 }
 
 .task-title,
@@ -354,6 +366,13 @@ div * {
 .task-button-delete:hover,
 .task-button-cancel:hover {
   font-size: 15px;
+}
+
+.task-done-checkbox {
+  background-color: red;
+  width: 100px;
+  height: 100px;
+  grid-area: checkbox;
 }
 
 .task-title-edit,

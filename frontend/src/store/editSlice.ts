@@ -3,6 +3,7 @@ import type { EditState } from "../schemas/schemas"
 
 
 const initialState: EditState = {
+    selectedTask: null,
     editableTask: null,
     settingsToggle: false,
     resetPasswordToggle: false,
@@ -15,6 +16,9 @@ const editSlice = createSlice({
     reducers: {
         editTask(state, action) {
             state.editableTask = action.payload
+        },
+        selectTask(state, action) {
+            state.selectedTask = action.payload
         },
         settingsToggle(state) {
             state.settingsToggle = !state.settingsToggle
@@ -38,6 +42,12 @@ const editSlice = createSlice({
 
 
 
-export const { editTask, settingsToggle, resetPasswordToggle, deleteUserToggle } = editSlice.actions
+export const {
+    editTask,
+    selectTask,
+    settingsToggle,
+    resetPasswordToggle,
+    deleteUserToggle
+} = editSlice.actions
 export default editSlice.reducer
 

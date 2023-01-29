@@ -48,6 +48,7 @@ export type DeleteUser = {
 }
 
 export type EditState = {
+    selectedTask: null | number
     editableTask: null | number
     settingsToggle: boolean
     resetPasswordToggle: boolean
